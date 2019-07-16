@@ -14,7 +14,7 @@ function App() {
     <div className="App">
       <header className="App-header">
         <p>Marth me up baby</p>
-        <img src={marthImgs[3]} width="600px"/>
+        <img src={marthImgs[2]} width="600px"/>
         <p>get better or bend over</p>
       </header>
     </div>
