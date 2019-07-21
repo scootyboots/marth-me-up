@@ -1,5 +1,7 @@
-import React from 'react';
+import React, {Component} from 'react';
 import './App.css';
+import Tags from './Tags/Tags'
+import List from './List/List'
 
 const marthImgs = [
   "https://cdn.imgbin.com/24/7/19/imgbin-super-smash-bros-melee-princess-zelda-marth-fire-emblem-character-marth-iF7XwmWeXGXETpsJmGjNgzpA6.jpg",
@@ -9,22 +11,62 @@ const marthImgs = [
 ]
 
 
+
 function getRandomInt(max) {
   return Math.floor(Math.random() * Math.floor(max));
 }
 
 const chosenImg = getRandomInt(marthImgs.length);
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <p>Marth me up baby</p>
-        <img src={marthImgs[chosenImg]} width="600px" alt="marth image"/>
-        <p>get better or bend over</p>
-      </header>
-    </div>
-  );
+// const chosenTag = getRandomInt(tags.length)
+
+class App extends Component {
+
+  state = {
+    lists : [
+      {tag: "Fox" , content: ['wave shine sucks', 'snap to ledge'], active: true},
+      {tag: "Falco" , content: ['the combo game is real', 'backthrow downtilt', 'blue is the worst color for this bird'], active: true},
+      {tag: "Marth" , content: ['lol down tilt', 'he only has one move', 'here\'s another note'], active: true}
+    ]
+  }
+
+  listDisplayHandler = (tag) => {
+    // const targetTopic = this.state.lists.filter((topic) => topic.tag === tag);
+    // console.log(targetTopic === this.state.lists[0])
+    // const i = this.state.lists.indexOf(targetTopic);
+    // console.log(i)
+    // const targetTopicActive = this.state.lists[i].active
+    // if (targetTopicActive === true) {
+    //   // targetTopicActive = false
+    //   this.setState({targetTopicActive : false})
+    // } else {
+    //   this.setState({targetTopicActive : false})
+    // }
+
+    // // console.log(targetTopic.active)
+    // // this.setState({ this.state.lists[1})
+
+  }
+
+
+  render() {
+    return (
+      <div className="App">
+        <header className="App-header">
+          <p>Marth me up baby</p>
+          <img src={marthImgs[chosenImg]} width="100px" alt="marth"/>
+          <p>get better or bend over</p>
+        </header>
+        <Tags 
+          tags={this.state.lists.map((topic) => topic.tag)}
+          click={this.listDisplayHandler}
+        />
+        <List
+          contents={this.state.lists.map((topic) => topic.content)}
+        />
+      </div>
+    )
+  }
 }
 
 export default App;

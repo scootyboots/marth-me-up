@@ -1,0 +1,9 @@
+.tag-container {
+  display: flex;
+}
+
+.Tag {
+  border: 1px solid black;
+  margin: 5px;
+  padding: 5px;
+}
