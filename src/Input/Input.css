@@ -1,0 +1,18 @@
+.input-container {
+  display: flex;
+  margin-left: 15px;
+}
+
+.submitButton {
+  border: 1px solid black;
+  background: black;
+  color: white;
+  font-weight: 700;
+  font-size: 11px;
+  padding: 0 0.5em;
+  cursor: pointer;
+}
+
+select {
+  border-radius: 0px;
+}

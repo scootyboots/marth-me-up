@@ -1,7 +1,9 @@
 import React, {Component} from 'react';
 import './App.css';
+import Topic from './Topic/Topic'
 import Tags from './Tags/Tags'
 import List from './List/List'
+import Input from './Input/Input'
 
 const marthImgs = [
   "https://cdn.imgbin.com/24/7/19/imgbin-super-smash-bros-melee-princess-zelda-marth-fire-emblem-character-marth-iF7XwmWeXGXETpsJmGjNgzpA6.jpg",
@@ -20,50 +22,90 @@ const chosenImg = getRandomInt(marthImgs.length);
 
 // const chosenTag = getRandomInt(tags.length)
 
+const topicsDB = [
+  {tag: "Fox" , contents: ['wave shine sucks', 'snap to ledge'], active: true},
+  {tag: "Falco" , contents: ['the combo game is real', 'backthrow downtilt', 'blue is the worst color for this bird'], active: true},
+  {tag: "Marth" , contents: ['lol down tilt', 'he only has one move', 'here\'s another note'], active: true}
+]
+
+// const topicsDB = {
+//   "Fox" : {
+//     id: 1,
+//     contents: ['i am fox'],
+//     active: true
+//   },
+//   "Falco" : {
+//     id: 2, 
+//     contents: ['i am sick'],
+//     active: false
+//   },
+//   "Marth" : {
+//     id: 3,
+//     contents: ['i am space boy'],
+//     active: true
+//   }
+// }
+
 class App extends Component {
 
+  // selected = document.querySelector('.input-container select').value
+
   state = {
-    lists : [
-      {tag: "Fox" , content: ['wave shine sucks', 'snap to ledge'], active: true},
-      {tag: "Falco" , content: ['the combo game is real', 'backthrow downtilt', 'blue is the worst color for this bird'], active: true},
-      {tag: "Marth" , content: ['lol down tilt', 'he only has one move', 'here\'s another note'], active: true}
-    ]
+    tags: topicsDB.map((topic) => topic.tag),
+    contents: topicsDB.map((topic) => topic.contents),
+    active: topicsDB.map((topic) => topic.active),
+    keys: topicsDB.map((topic) => topicsDB.indexOf(topic))
   }
 
-  listDisplayHandler = (tag) => {
-    // const targetTopic = this.state.lists.filter((topic) => topic.tag === tag);
-    // console.log(targetTopic === this.state.lists[0])
-    // const i = this.state.lists.indexOf(targetTopic);
-    // console.log(i)
-    // const targetTopicActive = this.state.lists[i].active
-    // if (targetTopicActive === true) {
-    //   // targetTopicActive = false
-    //   this.setState({targetTopicActive : false})
-    // } else {
-    //   this.setState({targetTopicActive : false})
-    // }
 
-    // // console.log(targetTopic.active)
-    // // this.setState({ this.state.lists[1})
+  listDisplayHandler = (key) => {
+    let newActive = this.state.active
+    
+    if (newActive[key] === true) {
+      newActive[key] = false;
+    } else {
+      newActive[key] = true;
+    }
 
+    this.setState({active: newActive})
+  }
+
+  inputHandler = (tag, input) => {
+    console.log(tag, input)
+    const key = this.state.tags.indexOf(tag)
+    topicsDB[key].contents.push(input)
+
+    this.setState({contents: topicsDB.map((topic) => topic.contents)})
   }
 
 
   render() {
+
+    let contents = this.state.active.map((active, i) => {
+      return active ? this.state.contents[i] : null
+    })
+
     return (
       <div className="App">
         <header className="App-header">
           <p>Marth me up baby</p>
           <img src={marthImgs[chosenImg]} width="100px" alt="marth"/>
+          <p className="samurai">侍</p>
           <p>get better or bend over</p>
         </header>
+        <div>
         <Tags 
-          tags={this.state.lists.map((topic) => topic.tag)}
+          tags={this.state.tags}
           click={this.listDisplayHandler}
+          key={this.state.key}
+          active={this.state.active}
         />
-        <List
-          contents={this.state.lists.map((topic) => topic.content)}
+        <List contents={contents} />
+        <Input
+          tags={this.state.tags}
+          userInput={this.inputHandler}
         />
+      </div>
       </div>
     )
   }

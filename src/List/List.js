@@ -4,9 +4,10 @@ import './List.css'
 const List = ({contents}) => (
   <div className="list-container">
     {contents.map((content) => (
+      content ?
       <ul>
         {content.map((contentEntry) => <li>{contentEntry}</li>)}
-      </ul>
+      </ul> : null
     ))}
   </div>
 )
