@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import './App.css';
-import Topic from './Topic/Topic'
 import Tags from './Tags/Tags'
 import List from './List/List'
 import Input from './Input/Input'
