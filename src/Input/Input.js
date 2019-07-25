@@ -11,7 +11,7 @@ class Input extends Component {
           <option>{tag}</option>
         ))}
       </select>
-      <input ref="userInput" type="text"></input>
+      <input ref="userInput" type="text" placeholder="type your note here" value={this.props.input} onChange={this.props.inputChange}></input>
       <button onClick={() => (this.props.userInput(this.refs.selectedTag.value, this.refs.userInput.value))}>you suck Sapce Boy ></button>
     </div>
     )

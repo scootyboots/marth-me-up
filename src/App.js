@@ -54,7 +54,8 @@ class App extends Component {
     tags: topicsDB.map((topic) => topic.tag),
     contents: topicsDB.map((topic) => topic.contents),
     active: topicsDB.map((topic) => topic.active),
-    keys: topicsDB.map((topic) => topicsDB.indexOf(topic))
+    keys: topicsDB.map((topic) => topicsDB.indexOf(topic)),
+    input: ''
   }
 
 
@@ -70,13 +71,19 @@ class App extends Component {
     this.setState({active: newActive})
   }
 
-  inputHandler = (tag, input) => {
-    console.log(tag, input)
+  addInputHandler = (tag, input) => {
     const key = this.state.tags.indexOf(tag)
     topicsDB[key].contents.push(input)
 
-    this.setState({contents: topicsDB.map((topic) => topic.contents)})
+    this.setState({contents: topicsDB.map((topic) => topic.contents), input: ''})
+
   }
+
+  inputChangeHandler = (event) => {
+    this.setState({ input: event.target.value })
+  }
+
+
 
 
   render() {
@@ -103,7 +110,9 @@ class App extends Component {
         <List contents={contents} />
         <Input
           tags={this.state.tags}
-          userInput={this.inputHandler}
+          input={this.state.input}
+          inputChange={this.inputChangeHandler}
+          userInput={this.addInputHandler}
         />
       </div>
       </div>
