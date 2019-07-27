@@ -7,8 +7,8 @@ class Input extends Component {
     return (
       <div class="input-container">
       <select ref="selectedTag">
-        {this.props.tags.map((tag) => (
-          <option>{tag}</option>
+        {this.props.topics.map((topic) => (
+          <option>{topic.tag}</option>
         ))}
       </select>
       <input ref="userInput" type="text" placeholder="type your note here" value={this.props.input} onChange={this.props.inputChange}></input>

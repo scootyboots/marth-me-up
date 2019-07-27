@@ -1,12 +1,12 @@
 import React, {Component} from 'react'
 import './List.css'
 
-const List = ({contents}) => (
+const List = ({topics}) => (
   <div className="list-container">
-    {contents.map((content) => (
-      content ?
+    {topics.map((topic) => (
+      topic.active ?
       <ul>
-        {content.map((contentEntry) => <li>{contentEntry}</li>)}
+        {topic.contents.map((content) => <li>{content}</li>)}
       </ul> : null
     ))}
   </div>

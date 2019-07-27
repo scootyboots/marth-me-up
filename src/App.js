@@ -3,6 +3,7 @@ import './App.css';
 import Tags from './Tags/Tags'
 import List from './List/List'
 import Input from './Input/Input'
+import topicsDB from './db.json'
 
 const marthImgs = [
   "https://cdn.imgbin.com/24/7/19/imgbin-super-smash-bros-melee-princess-zelda-marth-fire-emblem-character-marth-iF7XwmWeXGXETpsJmGjNgzpA6.jpg",
@@ -21,39 +22,22 @@ const chosenImg = getRandomInt(marthImgs.length);
 
 // const chosenTag = getRandomInt(tags.length)
 
-const topicsDB = [
-  {tag: "Fox" , contents: ['wave shine sucks', 'snap to ledge'], active: true},
-  {tag: "Falco" , contents: ['the combo game is real', 'backthrow downtilt', 'blue is the worst color for this bird'], active: true},
-  {tag: "Marth" , contents: ['lol down tilt', 'he only has one move', 'here\'s another note'], active: true}
-]
-
 // const topicsDB = {
-//   "Fox" : {
-//     id: 1,
-//     contents: ['i am fox'],
-//     active: true
-//   },
-//   "Falco" : {
-//     id: 2, 
-//     contents: ['i am sick'],
-//     active: false
-//   },
-//   "Marth" : {
-//     id: 3,
-//     contents: ['i am space boy'],
-//     active: true
-//   }
+//   Fox: {tag: "Fox" , contents: ['wave shine sucks', 'snap to ledge'], active: true},
+//   Falco: {tag: "Falco" , contents: ['the combo game is real', 'backthrow downtilt', 'blue is the worst color for this bird'], active: true},
+//   Marth: {tag: "Marth" , contents: ['lol down tilt', 'he only has one move', 'here\'s another note'], active: true}
 // }
 
+console.log(`Package for writing to json ${topicsDB}`)
+console.log(topicsDB.Fox)
 class App extends Component {
 
   // selected = document.querySelector('.input-container select').value
 
   state = {
-    tags: topicsDB.map((topic) => topic.tag),
-    contents: topicsDB.map((topic) => topic.contents),
-    active: topicsDB.map((topic) => topic.active),
-    keys: topicsDB.map((topic) => topicsDB.indexOf(topic)),
+    fox: topicsDB["Fox"],
+    falco: topicsDB["Falco"],
+    marth: topicsDB["Marth"],
     input: ''
   }
 
@@ -84,12 +68,12 @@ class App extends Component {
 
 
 
-
   render() {
 
-    let contents = this.state.active.map((active, i) => {
-      return active ? this.state.contents[i] : null
-    })
+
+    // let contents = this.state.active.map((active, i) => {
+    //   return active ? this.state.contents[i] : null
+    // })
 
     return (
       <div className="App">
@@ -101,17 +85,17 @@ class App extends Component {
         </header>
         <div>
         <Tags 
-          tags={this.state.tags}
+          topics={[this.state.fox, this.state.falco, this.state.marth]}
           click={this.listDisplayHandler}
-          key={this.state.key}
-          active={this.state.active}
         />
-        <List contents={contents} />
+        <List 
+          topics={[this.state.fox, this.state.falco, this.state.marth]}
+        />
         <Input
-          tags={this.state.tags}
+          topics={[this.state.fox, this.state.falco, this.state.marth]}
           input={this.state.input}
           inputChange={this.inputChangeHandler}
-          userInput={this.addInputHandler}
+          addInputHandler={this.addInputHandler}
         />
       </div>
       </div>

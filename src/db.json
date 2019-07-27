@@ -1,0 +1,20 @@
+{
+  "Fox" : {
+    "id": 1,
+    "tag": "Fox",
+    "contents": ["i am fox", "dumbdum"],
+    "active": true
+  },
+  "Falco" : {
+    "id": 2, 
+    "tag": "Falco",
+    "contents": ["i am sick"],
+    "active": false
+  },
+  "Marth" : {
+    "id": 3,
+    "tag": "Marth",
+    "contents": ["i am space boy", "i am not sick"],
+    "active": true
+  }
+}

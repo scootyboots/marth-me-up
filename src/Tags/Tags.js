@@ -3,10 +3,10 @@ import './Tags.css'
 
 
 
-const Tags = ({tags, active, click}) => (
+const Tags = ({topics, click}) => (
   <div className="tag-container">
-    {tags.map((tag, index) => (
-      <div className={`Tag ${active[index]}`} onClick={() => click(index)}>{tag}</div>
+    {topics.map((topic) => (
+      <div className={`Tag ${topic.active}`} onClick={() => click(topic.id)}>{topic.tag}</div>
     ))}
   </div>
   
